@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "soyagaci",
+  "description": "Converts lineage information which can be retrieve from E-devlet (Turkish Govurnment Service) to an actual lineage graphic.",
+  "version": "1.0",
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "scripts": ["background.js", "hot-reload.js"]
+  }
+}
