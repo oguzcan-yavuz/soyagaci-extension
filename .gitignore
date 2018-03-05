@@ -1,1 +1,11 @@
+# Editor configs
 .idea/
+
+# Dependency directories
+node_modules/
+
+# Logs
+*.log
+
+# No need to push them until project finish
+dist/
