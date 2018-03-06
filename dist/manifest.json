@@ -4,13 +4,13 @@
   "description": "Converts lineage information which can be retrieve from E-devlet (Turkish Government Service) to an actual lineage graphic.",
   "version": "1.0",
   "page_action": {
-    "default_icon": "src/img/icon.png"
+    "default_icon": "icon.png"
   },
   "permissions": [
     "tabs",
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["src/js/background.ts", "lib/hot-reload.js"]
+    "scripts": ["extension.bundle.js", "hot-reload.js"]
   }
 }
