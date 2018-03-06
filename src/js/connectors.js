@@ -1,5 +1,8 @@
-// fix arrow end issues:
-// https://github.com/DmitryBaranovskiy/raphael/issues/471
+import '../css/bootstrap.min.css';
+import '../css/connectors.css';
+import '../css/Treant.css';
+import '../css/style.css';
+import '../css/perfect-scrollbar.css';
 
 let gelen = {
     "nodeStructure": {

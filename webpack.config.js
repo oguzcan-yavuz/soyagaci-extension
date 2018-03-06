@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     entry: {
         extension: './src/js/background.js',
-        display: './lib/connectors.js'
+        display: './src/js/connectors.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -14,5 +14,13 @@ module.exports = {
         net: 'empty',
         tls: 'empty',
         child_process: 'empty'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
     }
 };

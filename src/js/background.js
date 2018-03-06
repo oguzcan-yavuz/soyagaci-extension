@@ -3,7 +3,7 @@ import { HTMLParser } from '@soyagaci/parser/format/html';
 HTMLParser("<h1>test</h1>").then(console.log);
 
 chrome.pageAction.onClicked.addListener(function(tab) {
-    let action_url = "file:///home/yvz/soyagaci-extension/index.html";
+    let action_url = "file:///home/yvz/soyagaci-extension/dist/index.html";
     chrome.tabs.create({url: action_url});
 });
 
