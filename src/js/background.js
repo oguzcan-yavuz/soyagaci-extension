@@ -1,4 +1,5 @@
 import { HTMLParser } from '@soyagaci/parser/format/html';
+
 HTMLParser("<h1>test</h1>").then(console.log);
 
 chrome.pageAction.onClicked.addListener(function(tab) {

@@ -11,6 +11,6 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["src/js/background.js", "lib/hot-reload.js"]
+    "scripts": ["src/js/background.ts", "lib/hot-reload.js"]
   }
 }
