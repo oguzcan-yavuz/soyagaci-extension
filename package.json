@@ -25,6 +25,9 @@
     "webpack-cli": "^2.0.10"
   },
   "dependencies": {
-    "@soyagaci/parser": "^1.0.1"
+    "@soyagaci/parser": "^1.0.1",
+    "bootstrap": "^4.0.0",
+    "gojs": "^1.8.15",
+    "jquery": "^3.3.1"
   }
 }

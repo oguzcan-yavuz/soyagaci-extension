@@ -1,8 +1,7 @@
 import '../css/bootstrap.min.css';
-import '../css/connectors.css';
-import '../css/Treant.css';
 import '../css/style.css';
-import '../css/perfect-scrollbar.css';
+
+import $ from 'jquery';
 
 let gelen = {
     "nodeStructure": {
@@ -112,27 +111,3 @@ $(function () {
 
     });
 });
-
-/* Bitis */
-
-let chart_config = {
-    chart: {
-        container: "#OrganiseChart-big-commpany",
-        levelSeparation: 25,
-
-        rootOrientation: "WEST",
-
-        nodeAlign: "BOTTOM",
-
-        connectors: {
-            type: "step",
-            style: {
-                "stroke-width": 2
-            }
-        },
-        node: {
-            HTMLclass: "big-commpany"
-        }
-    },
-    'nodeStructure': gelen["nodeStructure"]
-};
