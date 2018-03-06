@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     entry: {
         extension: './src/js/background.js',
-        display: './src/js/connectors.js'
+        display: './src/js/display.js'
     },
     output: {
         filename: '[name].bundle.js',
@@ -22,5 +22,6 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             }
         ]
-    }
+    },
+    devtool: "source-map"
 };
