@@ -8,7 +8,7 @@ chrome.pageAction.onClicked.addListener(function(tab) {
 });
 
 function checkForValidUrl(tabId, changeInfo, tab) {
-    if(tab.url.indexOf("") === 0) {
+    if(tab.url.indexOf("https://www.turkiye.gov.tr/nvi-alt-ust-soy-bilgisi-sorgulama") === 0) {
         chrome.pageAction.show(tabId);
     }
 }
