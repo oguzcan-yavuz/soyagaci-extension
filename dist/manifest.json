@@ -11,6 +11,8 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["extension.bundle.js"]
+    "scripts": [
+      "extension.bundle.js"
+    ]
   }
 }
