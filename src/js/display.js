@@ -1,7 +1,29 @@
 import '../css/bootstrap.min.css';
 import '../css/style.css';
+import '../../node_modules/treant-js/Treant.css';
 
 import $ from 'jquery';
+import { Treant } from 'treant-js';
+
+let chart_config = {
+    chart: {
+        container: "#lineage",
+    },
+
+    nodeStructure: {
+        text: { name: "Parent node" },
+        children: [
+            {
+                text: { name: "First child" }
+            },
+            {
+                text: { name: "Second child" }
+            }
+        ]
+    }
+};
+
+let chart = new Treant(chart_config);
 
 /* Kisi Detay */
 

@@ -28,6 +28,8 @@
     "@soyagaci/models": "^1.1.1",
     "@soyagaci/parser": "^1.0.1",
     "bootstrap": "^4.0.0",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "raphael": "^2.2.7",
+    "treant-js": "^1.0.1"
   }
 }

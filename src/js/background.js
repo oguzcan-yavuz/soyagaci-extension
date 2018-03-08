@@ -1,6 +1,8 @@
 import { HTMLParser } from '@soyagaci/parser/format/html';
 import { convertRecordArrayToRelations } from '@soyagaci/models';
 
+let relationArray;
+
 function checkForValidUrl(tabId, changeInfo, tab) {
     let eDevletUrl = "https://www.turkiye.gov.tr/nvi-alt-ust-soy-bilgisi-sorgulama";
     if (tab.url === eDevletUrl)
@@ -33,7 +35,8 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
     chrome.tabs.create({url: actionUrl}, function (tab) {
         HTMLParser(htmlResult)
             .then(function(parsedResults) {
-                console.log(convertRecordArrayToRelations(parsedResults.records));
+                relationArray = convertRecordArrayToRelations(parsedResults.records);
+                console.log(relationArray);
             })
     })
 });
