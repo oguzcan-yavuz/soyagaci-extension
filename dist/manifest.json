@@ -11,6 +11,6 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["extension.bundle.js", "hot-reload.js"]
+    "scripts": ["extension.bundle.js"]
   }
 }
