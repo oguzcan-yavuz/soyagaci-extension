@@ -4,6 +4,14 @@ import '../../node_modules/treant-js/Treant.css';
 
 import $ from 'jquery';
 import { Treant } from 'treant-js';
+import { HTMLParser } from '@soyagaci/parser/format/html';
+import { convertRecordArrayToRelations } from '@soyagaci/models';
+
+// let relationArray = HTMLParser(htmlResult).then(function(parsedResults) {
+//     return convertRecordArrayToRelations(parsedResults.records);
+// });
+//
+// console.log(relationArray);
 
 let chart_config = {
     chart: {
