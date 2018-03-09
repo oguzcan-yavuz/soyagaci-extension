@@ -4,15 +4,11 @@ function checkForValidUrl(tabId, changeInfo, tab) {
         chrome.pageAction.show(tabId);
 }
 
-function onUpdate() {
-    chrome.tabs.onUpdated.addListener(checkForValidUrl);
-}
+chrome.tabs.onUpdated.addListener(checkForValidUrl);
 
-function onClick() {
-    chrome.pageAction.onClicked.addListener(function (tab) {
-        onWindowLoad();
-    });
-}
+chrome.pageAction.onClicked.addListener(function (tab) {
+    onWindowLoad();
+});
 
 // *** Getting HTML of the source page ***
 
@@ -26,22 +22,17 @@ function onWindowLoad() {
     });
 }
 
-function onMsg() {
-    let htmlResult;
-    chrome.runtime.onMessage.addListener(function (request, sender) {
-        if (request.action === "getSource")
-            htmlResult = request.source;
-    });
-    createTab(htmlResult);
-}
+
+chrome.runtime.onMessage.addListener(function (request, sender) {
+    if (request.action === "getSource")
+        createTab(request.source);
+});
 
 // ***      ***
 
 function createTab(htmlResult) {
     let actionUrl = "file:///home/yvz/soyagaci-extension/dist/index.html";
-    chrome.tabs.create({url: actionUrl});
+    chrome.tabs.create({url: actionUrl}, function (tab) {
+        chrome.tabs.sendMessage(tab.id, { source: htmlResult });
+    });
 }
-
-onUpdate();
-onClick();
-onMsg();

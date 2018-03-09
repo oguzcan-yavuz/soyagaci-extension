@@ -14,5 +14,17 @@
     "scripts": [
       "background.bundle.js"
     ]
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///home/yvz/soyagaci-extension/dist/index.html",
+        "https://*/",
+        "http://*/"
+      ],
+      "js": [
+        "display.bundle.js"
+      ]
+    }
+  ]
 }

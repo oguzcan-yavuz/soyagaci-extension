@@ -7,11 +7,18 @@ import { Treant } from 'treant-js';
 import { HTMLParser } from '@soyagaci/parser/format/html';
 import { convertRecordArrayToRelations } from '@soyagaci/models';
 
-// let relationArray = HTMLParser(htmlResult).then(function(parsedResults) {
-//     return convertRecordArrayToRelations(parsedResults.records);
-// });
-//
-// console.log(relationArray);
+console.log(chrome.runtime.onMessage);
+
+chrome.runtime.onMessage.addListener(function(request, sender) {
+    let htmlResult = request.source;
+    createRelationArray(htmlResult).then(console.log);
+});
+
+function createRelationArray(html) {
+    return HTMLParser(html).then(function(parsedResults) {
+        return convertRecordArrayToRelations(parsedResults.records);
+    });
+}
 
 let chart_config = {
     chart: {
