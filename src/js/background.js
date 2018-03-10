@@ -22,17 +22,25 @@ function onWindowLoad() {
     });
 }
 
+let htmlResult;
 
 chrome.runtime.onMessage.addListener(function (request, sender) {
-    if (request.action === "getSource")
-        createTab(request.source);
+    if (request.action === "getSource") {
+        htmlResult = request.source;
+        createTab();
+    }
 });
 
 // ***      ***
 
-function createTab(htmlResult) {
-    let actionUrl = "file:///home/yvz/soyagaci-extension/dist/index.html";
-    chrome.tabs.create({url: actionUrl}, function (tab) {
-        chrome.tabs.sendMessage(tab.id, { source: htmlResult });
-    });
+function createTab() {
+    let actionUrl = "file:///home/yvz/yvz-dev/soyagaci-extension/dist/index.html";
+    chrome.tabs.create({url: actionUrl});
 }
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if(request.action === "getHtml") {
+        sendResponse({ result: htmlResult });
+    }
+    return true;
+});
