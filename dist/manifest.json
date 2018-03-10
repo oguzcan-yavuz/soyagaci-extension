@@ -18,9 +18,7 @@
   "content_scripts": [
     {
       "matches": [
-        "file:///home/yvz/soyagaci-extension/dist/index.html",
-        "https://*/",
-        "http://*/"
+        "file:///home/yvz/yvz-dev/soyagaci-extension/dist/index.html"
       ],
       "js": [
         "display.bundle.js"
