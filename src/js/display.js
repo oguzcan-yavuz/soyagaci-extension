@@ -7,9 +7,12 @@ import { Treant } from 'treant-js';
 import { HTMLParser } from '@soyagaci/parser/format/html';
 import { convertRecordArrayToRelations } from '@soyagaci/models';
 
+let relationArray;
+
 chrome.runtime.sendMessage(null, { action: "getHtml" }, null, function(response) {
     let htmlResult = response.result;
     createRelationArray(htmlResult).then(function(relArr) {
+        relationArray = relArr;
         createChartConfig(relArr).catch(console.log);
     });
 });
@@ -20,12 +23,36 @@ function createRelationArray(html) {
     });
 }
 
+async function createChartConfig(relArr) {
+    let chartConfig = {
+        chart: {
+            container: "#OrganiseChart-big-commpany",
+            levelSeperation: 25,
+            padding: 10,
+            rootOrientation: "WEST",
+            nodeAlign: "BOTTOM",
+            connectors: {
+                type: "step",
+                style: {
+                    stroke: '#FF0040',
+                    "stroke-width": 2
+                }
+            },
+            node: {
+                HTMLclass: "big-commpany"
+            }
+        }
+    };
+    chartConfig.nodeStructure = await convertRelArrToNodeStructure(relArr, relArr.length - 1);
+    new Treant(chartConfig);
+}
+
 function convertRelArrToNodeStructure(relArr, personIndex) {
     let personInfo = relArr[personIndex].person;
     let relations = relArr[personIndex].relations;
     let result = {
         text: {
-            name: personInfo.name + (personInfo.lastName ? " " + personInfo.lastName : " -")
+            name: personIndex + ": " + personInfo.name + (personInfo.lastName ? " " + personInfo.lastName : " -")
         },
         children: []
     };
@@ -36,43 +63,28 @@ function convertRelArrToNodeStructure(relArr, personIndex) {
     return result;
 }
 
-async function createChartConfig(relArr) {
-    let chartConfig = {
-        chart: {
-            container: "#OrganiseChart-big-commpany"
-        }
-    };
-    chartConfig.nodeStructure = await convertRelArrToNodeStructure(relArr, relArr.length - 1);
-    new Treant(chartConfig);
-}
-
 /* Kisi Detay */
 
-// $(function () {
-//     $('p').click(function () {
-//         let kisi = $(this).text();
-//         let yakinlik = kisi.split(":")[1];
-//         let adiSoyadi = gelen["details"][yakinlik][1] + " " + gelen["details"][yakinlik][2];
-//         let yakinlikDerece = gelen["details"][yakinlik][0];
-//         let babaAdi = gelen["details"][yakinlik][3];
-//         let anneAdi = gelen["details"][yakinlik][4];
-//         let dogumYeri = gelen["details"][yakinlik][5];
-//         let nereli = gelen["details"][yakinlik][6];
-//         let cilt = gelen["details"][yakinlik][7];
-//         let medeniHali = gelen["details"][yakinlik][8];
-//         let durumu = gelen["details"][yakinlik][9];
-//         let cinsiyet = gelen["details"][yakinlik][10];
-//
-//         document.getElementById("yakinlik").innerHTML = "Yakınlık : " + yakinlikDerece;
-//         document.getElementById("isim").innerHTML = adiSoyadi;
-//         document.getElementById("babaAdi").innerHTML = "Baba Adı : " + babaAdi;
-//         document.getElementById("anneAdi").innerHTML = "Anne Adı : " + anneAdi;
-//         document.getElementById("dogumYeri").innerHTML = "Doğum Yeri / Tarihi: " + dogumYeri;
-//         document.getElementById("nereli").innerHTML = "İl / İlçe / Mahalle : " + nereli;
-//         document.getElementById("cilt").innerHTML = "Cilt - Hane - Birey No: " + cilt;
-//         document.getElementById("mHal").innerHTML = "Medeni Hali: " + medeniHali;
-//         document.getElementById("durum").innerHTML = "Durumu: " + durumu;
-//         document.getElementById("cinsiyet").innerHTML = "Cinsiyet: " + cinsiyet;
-//
-//     });
-// });
+function checkUndefined(candidate) {
+    return candidate != null ? candidate : "-"
+}
+
+$(function () {
+    $('p').click(function () {
+        let personIndex = $(this).text().split(": ")[0];
+        let personDetails = relationArray[personIndex].person;
+        let skip = ["lastName", "haneNo", "siraNo"];
+        let keyArr = Object.keys(personDetails);
+        for(let i = 0; i < keyArr.length; i++) {
+            let key = keyArr[i];
+            if(skip.indexOf(key) !== -1)
+                continue;
+            let html = key + ": " + checkUndefined(personDetails[key]);
+            if(key === "name")
+                html += " " + checkUndefined(personDetails["lastName"]);
+            else if(key === "ciltNo")
+                html += "-" + checkUndefined(personDetails["haneNo"]) + "-" + checkUndefined(personDetails["siraNo"]);
+            document.getElementById(key).innerHTML = html;
+        }
+    });
+});
